@@ -70,7 +70,7 @@ const RecommendedUser = ({ user }) => {
 					<div className='flex gap-2 justify-center'>
 						<button
 							onClick={() => acceptRequest(connectionStatus.data.requestId)}
-							className={`rounded-full p-1 flex items-center justify-center bg-green-500 hover:bg-green-600 text-white`}
+							className={`rounded-full p-1 flex items-center justify-center bg-violet-500 hover:bg-violet-600 text-white`}
 						>
 							<Check size={16} />
 						</button>
@@ -85,17 +85,17 @@ const RecommendedUser = ({ user }) => {
 			case "connected":
 				return (
 					<button
-						className='px-3 py-1 rounded-full text-sm bg-green-500 text-white flex items-center'
+						className='px-3 py-1 rounded-full text-sm bg-violet-500 text-white flex items-center'
 						disabled
 					>
 						<UserCheck size={16} className='mr-1' />
-						Connected
+						Tied
 					</button>
 				);
 			default:
 				return (
 					<button
-						className='px-3 py-1 rounded-full text-sm border border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-200 flex items-center'
+						className='px-3 py-1 rounded-full text-sm border border-primary text-primary hover:bg-violet-600 hover:text-white transition-colors duration-200 flex items-center'
 						onClick={handleConnect}
 					>
 						<UserPlus size={16} className='mr-1' />

@@ -3,7 +3,7 @@ import { Home, UserPlus, Bell } from "lucide-react";
 
 export default function Sidebar({ user }) {
 	return (
-		<div className='bg-secondary rounded-lg shadow'>
+		<div className='bg-violet-200 rounded-lg shadow'>
 			<div className='p-4 text-center'>
 				<div
 					className='h-16 rounded-t-lg bg-cover bg-center'
@@ -19,7 +19,7 @@ export default function Sidebar({ user }) {
 					/>
 					<h2 className='text-xl font-semibold mt-2'>{user.name}</h2>
 				</Link>
-				<p className='text-info text-xs'>{user.connections.length} connections</p>
+				{/* <p className='text-info text-xs'>{user.connections.length} connections</p> */}
 			</div>
 			<div className='border-t border-base-100 p-4'>
 				<nav>
@@ -27,7 +27,7 @@ export default function Sidebar({ user }) {
 						<li>
 							<Link
 								to='/'
-								className='flex items-center py-2 px-4 rounded-md hover:bg-primary hover:text-white transition-colors'
+								className='flex items-center py-2 px-4 rounded-md hover:bg-violet-600 hover:text-white transition-colors'
 							>
 								<Home className='mr-2' size={20} /> Home
 							</Link>
@@ -35,7 +35,7 @@ export default function Sidebar({ user }) {
 						<li>
 							<Link
 								to='/network'
-								className='flex items-center py-2 px-4 rounded-md hover:bg-primary hover:text-white transition-colors'
+								className='flex items-center py-2 px-4 rounded-md hover:bg-violet-600 hover:text-white transition-colors'
 							>
 								<UserPlus className='mr-2' size={20} /> My Network
 							</Link>
@@ -43,7 +43,7 @@ export default function Sidebar({ user }) {
 						<li>
 							<Link
 								to='/notifications'
-								className='flex items-center py-2 px-4 rounded-md hover:bg-primary hover:text-white transition-colors'
+								className='flex items-center py-2 px-4 rounded-md hover:bg-violet-600 hover:text-white transition-colors'
 							>
 								<Bell className='mr-2' size={20} /> Notifications
 							</Link>

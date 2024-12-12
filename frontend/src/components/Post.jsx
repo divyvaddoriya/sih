@@ -87,7 +87,7 @@ const Post = ({ post }) => {
 	};
 
 	return (
-		<div className='bg-secondary rounded-lg shadow mb-4'>
+		<div className='bg-violet-200 rounded-lg shadow mb-4'>
 			<div className='p-4'>
 				<div className='flex items-center justify-between mb-4'>
 					<div className='flex items-center'>
@@ -120,7 +120,7 @@ const Post = ({ post }) => {
 
 				<div className='flex justify-between text-info'>
 					<PostAction
-						icon={<ThumbsUp size={18} className={isLiked ? "text-blue-500  fill-blue-300" : ""} />}
+						icon={<ThumbsUp size={18} className={isLiked ? "text-violet-500  fill-violet-300" : ""} />}
 						text={`Like (${post.likes.length})`}
 						onClick={handleLikePost}
 					/>
@@ -168,7 +168,7 @@ const Post = ({ post }) => {
 
 						<button
 							type='submit'
-							className='bg-primary text-white p-2 rounded-r-full hover:bg-primary-dark transition duration-300'
+							className='bg-violet-600 text-white p-2 rounded-r-full hover:bg-yellow-900 transition duration-300'
 							disabled={isAddingComment}
 						>
 							{isAddingComment ? <Loader size={18} className='animate-spin' /> : <Send size={18} />}

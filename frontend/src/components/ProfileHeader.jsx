@@ -93,7 +93,7 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 			case "connected":
 				return (
 					<div className='flex gap-2 justify-center'>
-						<div className={`${baseClass} bg-green-500 hover:bg-green-600`}>
+						<div className={`${baseClass} bg-violet-500 hover:bg-violet-600`}>
 							<UserCheck size={20} className='mr-2' />
 							Connected
 						</div>
@@ -120,7 +120,7 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 					<div className='flex gap-2 justify-center'>
 						<button
 							onClick={() => acceptRequest(connectionStatus.data.requestId)}
-							className={`${baseClass} bg-green-500 hover:bg-green-600`}
+							className={`${baseClass} bg-violet-500 hover:bg-violet-600`}
 						>
 							Accept
 						</button>
@@ -136,7 +136,7 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 				return (
 					<button
 						onClick={() => sendConnectionRequest(userData._id)}
-						className='bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded-full transition duration-300 flex items-center justify-center'
+						className='bg-violet-800 hover:bg-violet-800-dark text-white py-2 px-4 rounded-full transition duration-300 flex items-center justify-center'
 					>
 						<UserPlus size={20} className='mr-2' />
 						Connect
@@ -237,7 +237,7 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 				{isOwnProfile ? (
 					isEditing ? (
 						<button
-							className='w-full bg-primary text-white py-2 px-4 rounded-full hover:bg-primary-dark
+							className='w-full bg-violet-800 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
 							 transition duration-300'
 							onClick={handleSave}
 						>
@@ -246,7 +246,7 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 					) : (
 						<button
 							onClick={() => setIsEditing(true)}
-							className='w-full bg-primary text-white py-2 px-4 rounded-full hover:bg-primary-dark
+							className='w-full bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
 							 transition duration-300'
 						>
 							Edit Profile
@@ -255,9 +255,10 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 				) : (
 					<div className='flex font-bold justify-center'>{renderConnectionButton()}</div>
 				)}
-			{ !isOwnProfile && mentordata?.data.mentor ? (
+			{ 
+			!isOwnProfile && mentordata?.data.mentor ? (
 				<div >
-	<button className='ml-[40%] mt-2 font-bold bg-primary text-white py-2 px-4 rounded-full hover:bg-primary-dark
+	<button className='ml-[40%] mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
 							 transition duration-300'
 							 onClick={()=>(
 								 navigate(`/profile/${username}/create1on1` ,{state: {mentorName: username }}))}>
@@ -266,8 +267,76 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 			</div>
 				) : (
 					<div> 							
-							</div>)
-					
+							</div>)					
+				}
+			{ 
+			!isOwnProfile && mentordata?.data.mentor ? (
+				<div >
+	<button className='ml-[40%] mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
+							 transition duration-300'
+							 onClick={()=>(
+								 navigate(`/profile/${username}/create1on1` ,{state: {mentorName: username }}))}>
+									book appointment
+								</button>
+			</div>
+				) : (
+					<div> 							
+							</div>)					
+				}
+			{ 
+			!isOwnProfile && mentordata?.data.mentor ? (
+				<div >
+	<button className='ml-[40%] mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
+							 transition duration-300'
+							 onClick={()=>(
+								 navigate(`/profile/${username}/create1on1` ,{state: {mentorName: username }}))}>
+									book appointment
+								</button>
+			</div>
+				) : (
+					<div> 							
+							</div>)					
+				}
+			{ 
+			!isOwnProfile && mentordata?.data.mentor ? (
+				<div >
+	<button className='ml-[40%] mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
+							 transition duration-300'
+							 onClick={()=>(
+								 navigate(`/profile/${username}/create1on1` ,{state: {mentorName: username }}))}>
+									book appointment
+								</button>
+			</div>
+				) : (
+					<div> 							
+							</div>)					
+				}
+			{ 
+			!isOwnProfile && mentordata?.data.mentor ? (
+				<div >
+	<button className='ml-[40%] mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
+							 transition duration-300'
+							 onClick={()=>(
+								 navigate(`/profile/${username}/create1on1` ,{state: {mentorName: username }}))}>
+									Book Appointment
+								</button>
+			</div>
+				) : (
+					<div> 							
+							</div>)					
+				}
+			{isOwnProfile ? (
+				<div >
+	<button className='w-full mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
+							 transition duration-300'
+							 onClick={()=>(
+								 navigate(`/refer-mentee` ,{state: {mentorName: username }}))}>
+									Refers
+								</button>
+			</div>
+				) : (
+					<div> 							
+							</div>)					
 				}
 				</div>
 		</div>

@@ -42,9 +42,14 @@ const { data: authUser } = useQuery({ queryKey: ["authUser"] });
 
   const navigate = useNavigate();
   const location = useLocation();
-
+  // const {username} = useP
   const {mentorName} = location.state ;
- 
+    console.log(mentorName);
+    const { data: mentordata } = useQuery({
+      queryKey: ["authUser",mentorName],
+      queryFn: () => axiosInstance.get(`/users/${mentorName}`),
+    });
+    console.log(mentordata);
     
     const studentName = authUser.username;
 
@@ -59,6 +64,28 @@ const { data: authUser } = useQuery({ queryKey: ["authUser"] });
         navigate(`/profile/${authUser._id}/myMeetings`,{state: {username: authUser.username}});
   } catch (error) {
     console.error("Error in handleMeetingCreation:", error);
+  }
+};
+
+const availableDates = mentordata?.availability
+?.filter((entry) => entry.timeSlots.some((slot) => !slot.booked))
+.map((entry) => entry.date) || [];
+console.log(availableDates);
+
+const availableTimes = mentordata?.availability?.reduce((acc, entry) => {
+const date = entry.date.toISOString().split("T")[0];
+acc[date] = entry.timeSlots
+  .filter((slot) => slot.booked)
+  .map((slot) => slot.startTime);
+return acc;
+}, {}) || {};
+console.log(availableTimes);
+
+const handleDateChange = (newDate) => {
+  try {
+    setSelectedDate(dayjs(newDate));
+  } catch (err) {
+    toast.error("Invalid date selected");
   }
 };
 

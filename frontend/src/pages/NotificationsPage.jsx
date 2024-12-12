@@ -34,10 +34,10 @@ const NotificationsPage = () => {
 	const renderNotificationIcon = (type) => {
 		switch (type) {
 			case "like":
-				return <ThumbsUp className='text-blue-500' />;
+				return <ThumbsUp className='text-violet-500' />;
 
 			case "comment":
-				return <MessageSquare className='text-green-500' />;
+				return <MessageSquare className='text-violet-500' />;
 			case "connectionAccepted":
 				return <UserPlus className='text-purple-500' />;
 			default:
@@ -96,11 +96,12 @@ const NotificationsPage = () => {
 	};
 
 	return (
-		<div className='grid grid-cols-1 lg:grid-cols-4 gap-6'>
-			<div className='col-span-1 lg:col-span-1'>
+		
+		<div className='grid grid-cols-1 lg:grid-cols-4 gap-4'>
+			{/* <div className='col-span-1 lg:col-span-1'>
 				<Sidebar user={authUser} />
-			</div>
-			<div className='col-span-1 lg:col-span-3'>
+			</div> */}
+			<div className='col-span-1  lg:col-span-3'>
 				<div className='bg-white rounded-lg shadow p-6'>
 					<h1 className='text-2xl font-bold mb-6'>Notifications</h1>
 
@@ -112,7 +113,7 @@ const NotificationsPage = () => {
 								<li
 									key={notification._id}
 									className={`bg-white border rounded-lg p-4 my-4 transition-all hover:shadow-md ${
-										!notification.read ? "border-blue-500" : "border-gray-200"
+										!notification.read ? "border-violet-500" : "border-gray-200"
 									}`}
 								>
 									<div className='flex items-start justify-between'>
@@ -145,7 +146,7 @@ const NotificationsPage = () => {
 											{!notification.read && (
 												<button
 													onClick={() => markAsReadMutation(notification._id)}
-													className='p-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200 transition-colors'
+													className='p-1 bg-violet-100 text-violet-600 rounded hover:bg-violet-200 transition-colors'
 													aria-label='Mark as read'
 												>
 													<Eye size={16} />

@@ -55,6 +55,32 @@ const userSchema = new mongoose.Schema(
 				ref: "User",
 			},
 		],
+		availability: [
+			{
+				date: {
+					type: Date,
+					required: true,
+				},
+				timeSlots: [
+					{
+						startTime: {
+							type: String, // Use ISO 8601 format like "09:00"
+							required: true,
+						},
+						booked:{
+							type: Boolean,
+							required: true,
+							default: false,
+						}
+						// endTime: {
+						// 	type: String, // Use ISO 8601 format like "10:00"
+						// 	required: true,
+						// },
+					},
+				],
+			},
+		],
+		
 	},
 	{ timestamps: true }
 );

@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "../../lib/axios.js";
 import { toast } from "react-hot-toast";
 import { Loader } from "lucide-react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
 	const [name, setName] = useState("");
@@ -12,7 +13,7 @@ const SignUpForm = () => {
 	const [mentor, setMentor] = useState(false);
 
 	const queryClient = useQueryClient();
-
+	const navigate = useNavigate();
 	const { mutate: signUpMutation, isLoading } = useMutation({
 		mutationFn: async (data) => {
 			const res = await axiosInstance.post("/auth/signup", data);
@@ -21,6 +22,13 @@ const SignUpForm = () => {
 		onSuccess: () => {
 			toast.success("Account created successfully");
 			queryClient.invalidateQueries({ queryKey: ["authUser"] });
+			// navigate('/home/me'); // Navigate to the dynamically constructed path
+			console.log("sign up");
+			if(mentor){
+				navigate('/skill'); 
+			}else{
+				navigate('/home/me')
+			}
 		},
 		onError: (err) => {
 			toast.error(err.response.data.message || "Something went wrong");
@@ -29,6 +37,7 @@ const SignUpForm = () => {
 
 	const handleSignUp = (e) => {
 		e.preventDefault();
+
 		signUpMutation({ name, username, email, password,mentor });
 	};
 
@@ -73,10 +82,8 @@ const SignUpForm = () => {
 				checked={mentor}
 				onClick={(e) => setMentor(e.target.checked)}
 				/>you want to become mentor ?
-
-				
 				</div>
-			<button type='submit' disabled={isLoading} className='btn btn-primary w-full text-white'>
+			<button type='submit'  disabled={isLoading} className='btn bg-violet-600 w-full text-white'>
 				{isLoading ? <Loader className='size-5 animate-spin' /> : "Agree & Join"}
 			</button>
 		</form>

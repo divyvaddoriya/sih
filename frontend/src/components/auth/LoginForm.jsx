@@ -3,24 +3,35 @@ import { useState } from "react";
 import { axiosInstance } from "../../lib/axios";
 import toast from "react-hot-toast";
 import { Loader } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const queryClient = useQueryClient();
+	const navigate = useNavigate()
 
 	const { mutate: loginMutation, isLoading } = useMutation({
 		mutationFn: (userData) => axiosInstance.post("/auth/login", userData),
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["authUser"] });
+		
+		  queryClient.invalidateQueries({ queryKey: ["authUser"] });
+	  
+		  // Dynamically construct the path
+		//   console.log(location.pathname);
+		
+		  navigate('home/me'); // Navigate to the dynamically constructed path
+		console.log("login");
+			
 		},
 		onError: (err) => {
-			toast.error(err.response.data.message || "Something went wrong");
+		  toast.error(err.response?.data?.message || "Something went wrong");
 		},
-	});
+	  }); 
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(e);
 		loginMutation({ username, password });
 	};
 
@@ -42,10 +53,11 @@ const LoginForm = () => {
 				className='input input-bordered w-full'
 				required
 			/>
-
-			<button type='submit' className='btn btn-primary w-full'>
-				{isLoading ? <Loader className='size-5 animate-spin' /> : "Login"}
+	
+			<button type='submit'  className='btn bg-violet-600 w-full'>
+				{isLoading ? <Loader className='size-5 animate-spin' /> : <div className="text-white">Login</div>}
 			</button>
+
 		</form>
 	);
 };

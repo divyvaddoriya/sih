@@ -24,11 +24,11 @@ const Home = () => {
           onChange={(e) => setValue(e.target.value)}
           type="text"
           placeholder="Enter room code"
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 mb-4"
         />
         <button
           onClick={handleJoinRoom}
-          className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
+          className="w-full py-3 bg-violet-500 text-white font-semibold rounded-lg hover:bg-violet-600 transition duration-300"
         >
           Join
         </button>

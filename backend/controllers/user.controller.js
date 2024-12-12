@@ -6,14 +6,8 @@ export const getSuggestedConnections = async (req, res) => {
 		const currentUser = await User.findById(req.user._id).select("connections");
 
 		// find users who are not already connected, and also do not recommend our own profile!! right?
-		const suggestedUser = await User.find({
-			_id: {
-				$ne: req.user._id,
-				$nin: currentUser.connections,
-			},
-		})
-			.select("name username profilePicture headline")
-			.limit(3);
+		const suggestedUser = await User.find({})
+			
 
 		res.json(suggestedUser);
 	} catch (error) {
@@ -25,17 +19,32 @@ export const getSuggestedConnections = async (req, res) => {
 export const getPublicProfile = async (req, res) => {
 	try {
 		const user = await User.findOne({ username: req.params.username }).select("-password");
-
 		if (!user) {
 			return res.status(404).json({ message: "User not found" });
 		}
-
 		res.json(user);
 	} catch (error) {
 		console.error("Error in getPublicProfile controller:", error);
 		res.status(500).json({ message: "Server error" });
 	}
 };
+
+export const getMentorProfile = async(req,res) =>{
+	try {
+		console.log(req.params.username);
+		
+		const mentor = await User.findOne({ username: req.params.username }).select("-password");
+
+		if (!mentor) {
+			return res.status(404).json({ message: "User not found" });
+		}
+
+		res.json(mentor);
+	} catch (error) {
+		console.error("Error in getPublicProfile controller:", error);
+		res.status(500).json({ message: "Server error" });
+	}
+}
 
 export const updateProfile = async (req, res) => {
 	try {
@@ -50,6 +59,7 @@ export const updateProfile = async (req, res) => {
 			"skills",
 			"experience",
 			"education",
+			"availability"
 		];
 
 		const updatedData = {};

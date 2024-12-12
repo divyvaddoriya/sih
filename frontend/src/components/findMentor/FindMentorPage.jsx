@@ -44,7 +44,7 @@ const FindMentorPage = () => {
                     value={search.skills}
                     onChange={(e) => setSearch({ ...search, skills: e.target.value })}
                 />
-                <button onClick={handleSearch} className="btn text-2xl btn-primary">
+                <button onClick={handleSearch} className="btn text-2xl btn-secondary">
                     Search
                 </button>
             </div>

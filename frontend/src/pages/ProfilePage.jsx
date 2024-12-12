@@ -8,6 +8,7 @@ import ExperienceSection from "../components/ExperienceSection";
 import EducationSection from "../components/EducationSection";
 import SkillsSection from "../components/SkillsSection";
 import toast from "react-hot-toast";
+import Availability from "../components/availability_date/Availability";
 
 const ProfilePage = () => {
 	const { username } = useParams();
@@ -48,6 +49,9 @@ const ProfilePage = () => {
 			<ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
 			<EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
 			<SkillsSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+			{userData.mentor && (	
+			<Availability userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+			)}
 		</div>
 	);
 };
