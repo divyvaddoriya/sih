@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import FAQ from "../components/FAQ";
 
 
 
@@ -98,11 +99,13 @@ const navigate = useNavigate()
           <h3 className="text-2xl font-bold mb-4">Are you a Mentor?</h3>
           <p className="text-lg mb-6">Join a community of passionate experts and thought-leaders who are being sought out by fellow entrepreneurs.</p>
           <button onClick={()=> navigate('/signup')} 
-           className="bg-white text-violet-700 px-6 py-3 rounded-md text-lg font-bold hover:bg-violet-300 transition">Become a Mentord</button>
+           className="bg-white text-violet-700 px-6 py-3 rounded-md text-lg font-bold hover:bg-violet-300 transition">Become a Mentor</button>
         </section>
       </main>
 
       {/* Footer Section */}
+
+      <FAQ />
       <footer className="bg-white text-center text-violet-700 py-10 border-t border-gray-300">
         <div className="max-w-screen-xl mx-auto flex flex-wrap justify-between gap-10 px-5">
           <div>

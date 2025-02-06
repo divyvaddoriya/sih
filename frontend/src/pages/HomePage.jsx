@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../lib/axios";
-import Sidebar from "../components/Sidebar";
+// import Sidebar from "../components/Sidebar";
 import PostCreation from "../components/PostCreation";
 import Post from "../components/Post";
 import { Users } from "lucide-react";
-import RecommendedUser from "../components/RecommendedUser";
-import UserCard from "../components/UserCard";
+// import RecommendedUser from "../components/RecommendedUser";
+// import UserCard from "../components/UserCard";
 import MentorCard from "../components/MentorCard";
 import Left_SideBar from "../components/Left_SideBar";
 import { Link } from "react-router-dom";
@@ -37,9 +37,11 @@ const HomePage = () => {
 <div className="flex flex-col p-5 justify-center items-center h-auto bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
   <div className="text-3xl font-bold mt-5 mb-4">Welcome, {authUser.name}!</div>
   <div className="text-lg mb-8">Start connecting with top mentors and get ready to take your career to the next level!</div>
-  <Link to={'/find'} className="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded">
+  { !authUser.mentor ?
+	  (<Link to={'/find'} className="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded">
     Browse Mentors
-  </Link>
+  </Link>):(<></>)
+  }
   <div className="flex justify-between mt-14 h-auto w-full  items-center">
   {/* {recommendedUsers?.length > 0 && (
   <div className="col-span-1 lg:col-span-1 hidden lg:block">
@@ -56,7 +58,7 @@ const HomePage = () => {
   </div>
 
 )} */}
-	{recommendedUsers?.length > 0 && (
+	{(recommendedUsers?.length > 0 && !authUser.mentor) ? (
   <div className="row-span-1 lg:row-span-1 w-15 hidden lg:block">
     <div className="rounded-lg shadow  overflow-y-auto">
    
@@ -71,7 +73,8 @@ const HomePage = () => {
       </div>
     </div>
   </div>
-)}
+):(<>
+</>)}
   </div>
 </div>
 
@@ -79,7 +82,9 @@ const HomePage = () => {
 			
 	
 			<div className='w-[60%] col-span-1 lg:col-span-2 order-first lg:order-none'>
+			{	authUser.mentor &&(
 				<PostCreation user={authUser} />
+)}
 
 				{posts?.map((post) => (
 					<Post key={post._id} post={post} />

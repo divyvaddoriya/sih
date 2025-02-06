@@ -49,7 +49,7 @@ const MentorCard = ({ user }) => {
   };
   
   export default MentorCard;
-import React from 'react';
+// import React from 'react';
 
 // function MentorCard({ mentor }) {
 //   return (

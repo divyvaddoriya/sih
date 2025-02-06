@@ -89,89 +89,69 @@ app.post('/api/v1/mentee-referrals', async (req, res) => {
 	  res.status(500).json({ message: 'Failed to refer mentee.' });
     }
   });
-//   message code
-const User = mongoose.models.User || mongoose.model('User', new mongoose.Schema({
-	name: String,
-	profilePicture: String,
-  }));
-  
-  const Message = mongoose.models.Message || mongoose.model('Message', new mongoose.Schema({
-	sender: String,
-	receiver: String,
-	content: String,
-	timestamp: { type: Date, default: Date.now },
-  }));
-  
-  
-  // API Routes
-  // Fetch all users with the latest message
-  app.get('/api/users', async (req, res) => {
-	try {
-	  const users = await User.find();
-	  const usersWithLastMessage = await Promise.all(
-		users.map(async (user) => {
-		  const lastMessage = await Message.findOne({
-			$or: [{ sender: user._id }, { receiver: user._id }],
-		  })
-			.sort({ timestamp: -1 })
-			.exec();
-		  return { ...user.toObject(), lastMessage };
-		})
-	  );
-	  res.json(usersWithLastMessage);
-	} catch (error) {
-	  res.status(500).json({ error: error.message });
-	}
-  });
-  
-  // Fetch chat history between two users
-  app.get('/api/messages/:userId1/:userId2', async (req, res) => {
-	const { userId1, userId2 } = req.params;
-	try {
-	  const messages = await Message.find({
-		$or: [
-		  { sender: userId1, receiver: userId2 },
-		  { sender: userId2, receiver: userId1 },
-		],
-	  }).sort({ timestamp: 1 });
-	  res.json(messages);
-	} catch (error) {
-	  res.status(500).json({ error: error.message });
-	}
-  });
-  
-  // Send a message
-  app.post('/api/messages', async (req, res) => {
-	const { sender, receiver, content } = req.body;
-	console.log("Sending message from ${sender} to ${receiver} with content: ${content}");
-	try {
-	  const message = await Message.create({ sender, receiver, content });
-	  io.emit('newMessage', message); // Emit new message to all clients
-	  res.status(201).json(message);
-	} catch (error) {
-	  res.status(500).json({ error: error.message });
-	}
+
+  app.post('/api/v1/submit-feedback', (req, res) => {
+	console.log('Feedback Received:', req.body);
+	res.json({ message: 'Feedback submitted successfully!' });
   });
 
-  // WebSocket for real-time updates
-  import http from 'http';
+  import User from './models/user.model.js'; // Replace with the correct path to your Mentor model
 
-const server = http.createServer(app);
+// Define the function to fetch mentor by name
+const findMentorByName = async (mentorName) => {
+	// console.log(Searching for mentor: ${mentorName});
+	return await User.findOne({ name: mentorName });
+};
 
-const io = new Server(server, { cors: { origin: '*' } });
-io.on('connection', (socket) => {
-  console.log('Client connected');
-  socket.on('disconnect', () => console.log('Client disconnected'));
-});
-const Port2=5001;
-server.listen(Port2, () => {
-//   console.log(Server running on port ${PORT});
-  connectDB();
-}).on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error();
-    process.exit(1);
-  } else {
-    console.error('Error starting server:', err);
-  }
+// Update mentor availability route
+app.patch('/api/v1/mentors/:mentorName/availability', async (req, res) => {
+	const { mentorName } = req.params;
+	const { date, time, booked } = req.body;
+
+	try {
+		// Find mentor by name (await the result)
+		const mentor = await findMentorByName(mentorName);
+		console.log(mentor);
+
+		if (!mentor) {
+			return res.status(404).json({ message: 'Mentor not found' });
+		}
+		// mentor.availability.timeSlots[0]=true;
+		// console.log(mentor.availability.timeSlots[0]);
+		// Check for the availability
+		// const formattedDate = new Date(date).toISOString().split('T')[0]; // Convert date to 'yyyy-mm-dd' format
+
+		const slot = mentor.availability.find(
+			(entry) => {
+				const entryDate = new Date(entry.date).toISOString().split('T')[0]; // Ensure entry.date is 'yyyy-mm-dd'
+				return entryDate === date &&
+					entry.timeSlots.some((slot) => slot.startTime === time);
+			}
+		);
+
+		if (!slot) {
+			console.log('No matching slot found for the given date and time.');
+		} else {
+			console.log('Slot found:', slot);
+		}
+
+
+		if (!slot) {
+			return res.status(404).json({ message: 'Date not found' });
+		}
+
+		// Update the time slot
+		const timeSlot = slot.timeSlots.find((t) => t.startTime === time);
+		if (!timeSlot) {
+			return res.status(404).json({ message: 'Time slot not found' });
+		}
+		console.log(timeSlot);
+
+		timeSlot.booked = booked;
+		await mentor.save(); // Save the updated mentor document
+		res.status(200).json({ message: 'Availability updated successfully' });
+	} catch (error) {
+		console.error('Error updating availability:', error);
+		res.status(500).json({ message: 'Internal server error' });
+	}
 });

@@ -23,7 +23,7 @@ import LandingPage from "./pages/Home";
 import ReferMenteeForm from "./components/ReferMenteeForm";
 import SkillsForm from './components/skill_form/SkillsForm';
 import QuestionsForm from './components/skill_form/QuestionsForm'
-import Messages from "./pages/Messages";
+// import Messages from "./pages/Messages";
 function App() {
 	const { data: authUser, isLoading } = useQuery({
 		queryKey: ["authUser"],
@@ -66,8 +66,9 @@ function App() {
 				<Route path='profile/:profile/mymeetings' element={authUser ? <MyMeetings /> : <Navigate to={"/login"}  />}/> 
 				<Route path='/find' element={authUser ? <FindMentorPage /> : <Navigate to={"/login"}  />} />
 				<Route path='/refer-mentee' element={authUser ? <ReferMenteeForm /> : <Navigate to={"/login"}  />} />
+				<Route path='/feedback' element={authUser ? <ReferMenteeForm /> : <Navigate to={"/login"}  />} />
 				{/* <Route path="/refer-mentee" component={ReferMenteeForm} /> */}
-				<Route path='/messages' element={authUser ? <Messages /> : <Navigate to={"/login"}  />} />
+				{/* <Route path='/messages' element={authUser ? <Messages /> : <Navigate to={"/login"}  />} /> */}
 
 			</Routes>
 			<Toaster />

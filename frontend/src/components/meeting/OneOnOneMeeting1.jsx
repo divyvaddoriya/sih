@@ -1,5 +1,3 @@
-
-
 import { EuiFlexGroup, EuiForm, EuiSpacer } from "@elastic/eui";
 import { useState } from "react";
 import CreateMeetingButtons from "../FormComponents/CreateMeetingButtons";
@@ -52,15 +50,16 @@ export default function OneOnOneMeeting() {
   // Extract available dates and times
   const availableDates =
     mentordata?.availability
-      ?.filter(
-        (entry) => entry.timeSlots.some((slot) => !slot.booked) // Only include dates with available slots
+      ?.filter((entry) =>
+        entry.timeSlots.some((slot) => !slot.booked) // Only include dates with available slots
       )
       ?.map((entry) => dayjs(entry.date).format("YYYY-MM-DD")) || [];
 
   const availableTimes =
-    mentordata?.availability
-      ?.find((entry) => dayjs(entry.date).format("YYYY-MM-DD") === selectedDate)
-      ?.timeSlots.filter((slot) => !slot.booked) // Only include available slots
+    mentordata?.availability?.find(
+      (entry) => dayjs(entry.date).format("YYYY-MM-DD") === selectedDate
+    )?.timeSlots
+      .filter((slot) => !slot.booked) // Only include available slots
       ?.map((slot) => slot.startTime) || [];
 
   const handleMeetingCreation = async (e) => {
@@ -74,7 +73,7 @@ export default function OneOnOneMeeting() {
         time: selectedTime,
         meetingId,
       };
-
+      
       // Create the meeting
       await createMeetingMutation(meetingData);
 
@@ -91,7 +90,7 @@ export default function OneOnOneMeeting() {
       });
     } catch (error) {
       console.error("Error in handleMeetingCreation:", error);
-      // toast.error("Error creating meeting");
+      toast.error("Error creating meeting");
     }
   };
 

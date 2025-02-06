@@ -81,12 +81,7 @@ const Navbar = () => {
 	  </div>
 									</Link>
 									}
-									<Link to={`/messages`} className='text-white flex flex-col items-center'>
-											<div className="group flex justify-center">
-	    <MessageCircle className="group-hover:text-violet-500" />
-	    <span className="text-lg text-white hidden group-hover:block">Messages</span>
-	  </div>
-									</Link>
+									
 									<Link to='/notifications' className='text-white flex flex-col ,Be]items-center relative'>
 									<div className="group flex justify-center">
 	    <Bell className="group-hover:text-violet-500" />

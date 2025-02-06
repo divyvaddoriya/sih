@@ -269,64 +269,11 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 					<div> 							
 							</div>)					
 				}
-			{ 
-			!isOwnProfile && mentordata?.data.mentor ? (
-				<div >
-	<button className='ml-[40%] mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
-							 transition duration-300'
-							 onClick={()=>(
-								 navigate(`/profile/${username}/create1on1` ,{state: {mentorName: username }}))}>
-									book appointment
-								</button>
-			</div>
-				) : (
-					<div> 							
-							</div>)					
-				}
-			{ 
-			!isOwnProfile && mentordata?.data.mentor ? (
-				<div >
-	<button className='ml-[40%] mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
-							 transition duration-300'
-							 onClick={()=>(
-								 navigate(`/profile/${username}/create1on1` ,{state: {mentorName: username }}))}>
-									book appointment
-								</button>
-			</div>
-				) : (
-					<div> 							
-							</div>)					
-				}
-			{ 
-			!isOwnProfile && mentordata?.data.mentor ? (
-				<div >
-	<button className='ml-[40%] mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
-							 transition duration-300'
-							 onClick={()=>(
-								 navigate(`/profile/${username}/create1on1` ,{state: {mentorName: username }}))}>
-									book appointment
-								</button>
-			</div>
-				) : (
-					<div> 							
-							</div>)					
-				}
-			{ 
-			!isOwnProfile && mentordata?.data.mentor ? (
-				<div >
-	<button className='ml-[40%] mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
-							 transition duration-300'
-							 onClick={()=>(
-								 navigate(`/profile/${username}/create1on1` ,{state: {mentorName: username }}))}>
-									Book Appointment
-								</button>
-			</div>
-				) : (
-					<div> 							
-							</div>)					
-				}
+			
+			
 			{isOwnProfile ? (
-				<div >
+	
+	<div >
 	<button className='w-full mt-2 font-bold bg-gradient-to-r from-violet-500 to-violet-600 text-white py-2 px-4 rounded-full hover:bg-violet-800-dark
 							 transition duration-300'
 							 onClick={()=>(

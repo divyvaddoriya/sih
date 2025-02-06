@@ -90,6 +90,7 @@ const Post = ({ post }) => {
 		<div className='bg-violet-200 rounded-lg shadow mb-4'>
 			<div className='p-4'>
 				<div className='flex items-center justify-between mb-4'>
+				
 					<div className='flex items-center'>
 						<Link to={`/profile/${post?.author?.username}`}>
 							<img
@@ -109,11 +110,12 @@ const Post = ({ post }) => {
 							</p>
 						</div>
 					</div>
-					{isOwner && (
+					{(isOwner && (authUser.mentor) )? (
 						<button onClick={handleDeletePost} className='text-red-500 hover:text-red-700'>
 							{isDeletingPost ? <Loader size={18} className='animate-spin' /> : <Trash2 size={18} />}
 						</button>
-					)}
+					):(<>
+					</>)}
 				</div>
 				<p className='mb-4'>{post.content}</p>
 				{post.image && <img src={post.image} alt='Post content' className='rounded-lg w-full mb-4' />}

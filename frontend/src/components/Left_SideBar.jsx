@@ -1,5 +1,5 @@
 // Left_SideBar.jsx
-import React from 'react';
+// import React from 'react';
 import { FaBell, FaGift, FaStar } from 'react-icons/fa'; // Icons for announcements
 
 const Left_SideBar = () => {
